@@ -49,12 +49,25 @@ const useStyles = makeStyles(() => ({
   },
   overlayContent: {
     textAlign: "center"
+  },
+  detailsSectionContainer: {
+    height: '15px'
+  },
+  detailsSection: {
+    position: 'absolute',
+    left: '25px',
+    bottom: '10px',
   }
 }));
 
 const WhiteTextTypography = withStyles({
   root: {
     color: "#FFFFFF"
+  }
+})(Typography);
+const BlueTextTypography = withStyles({
+  root: {
+    color: "#4677BF"
   }
 })(Typography);
 
@@ -144,6 +157,13 @@ function CardView(props) {
           </Box>
         </Box>
         : null}
+        <div className={classes.detailsSectionContainer} />
+        <div className={classes.detailsSection}>
+        {props.isSelected ? 
+        <BlueTextTypography>
+          VIEW DETAILS
+        </BlueTextTypography> : null}
+        </div>
     </div>
   )
 }
@@ -158,11 +178,11 @@ export default function CardLayout(props) {
 
   return (
     <Card className={classes.root}
-      classes={{ root: state.raised ? classes.cardHovered : "" }}
+      classes={{ root: state.raised || props.isSelected ? classes.cardHovered : "" }}
       onMouseOver={() => setState({ raised: true, shadow: 3 })}
       onMouseOut={() => setState({ raised: false, shadow: 1 })}
-      raised={state.raised} zdepth={state.shadow}>
-      <CardView cardObject={props.cardObject}/>
+      raised={props.isSelected ? true : state.raised} zdepth={props.isSelected ? 3 : state.shadow}>
+      <CardView cardObject={props.cardObject} isSelected={props.isSelected}/>
     </Card>
   );
 }
