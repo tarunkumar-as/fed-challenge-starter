@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -8,10 +8,14 @@ import Box from '@material-ui/core/Box';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faEye, faList } from '@fortawesome/free-solid-svg-icons'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 345,
-    height: '100%'
+    height: '100%',
+    transition: "transform 0.15s ease-in-out"
+  },
+  cardHovered: {
+    transform: "scale3d(1.05, 1.05, 1)"
   },
   header: {
     display: 'flex',
@@ -55,24 +59,25 @@ const WhiteTextTypography = withStyles({
 })(Typography);
 
 function OverlayView(props) {
+  const classes = useStyles();
   return (
     <div>
-      <div className={useStyles().display_inline}>
+      <div className={classes.display_inline}>
         <CardMedia component="img" image={props.cardObject.image} />
-        <div className={useStyles().overlay}>
-          <Box className={useStyles().overlayBox} display="flex" flexDirection="column" justifyContent="center">
-            <Box className={useStyles().overlayContent}>
-              <WhiteTextTypography className={useStyles().overlayContent} variant="h6" align="center">
+        <div className={classes.overlay}>
+          <Box className={classes.overlayBox} display="flex" flexDirection="column" justifyContent="center">
+            <Box className={classes.overlayContent}>
+              <WhiteTextTypography className={classes.overlayContent} variant="h6" align="center">
                 {props.cardObject.videosCount}
               </WhiteTextTypography>
             </Box>
-            <Box className={useStyles().overlayContent}>
-              <WhiteTextTypography className={useStyles().overlayContent} variant="caption" align="center">
+            <Box className={classes.overlayContent}>
+              <WhiteTextTypography className={classes.overlayContent} variant="caption" align="center">
                 WORKOUTS
             </WhiteTextTypography>
             </Box>
-            <Box className={useStyles().overlayContent}>
-              <FontAwesomeIcon className={useStyles().subImage} icon={faList} color='#FFFFFF' align="center" width="100%" />
+            <Box className={classes.overlayContent}>
+              <FontAwesomeIcon className={classes.subImage} icon={faList} color='#FFFFFF' align="center" width="100%" />
             </Box>
           </Box>
         </div>
@@ -82,22 +87,22 @@ function OverlayView(props) {
 }
 
 function MainView(props) {
+  const classes = useStyles();
   return (
     <div>
-      <div className={useStyles().display_inline}>
+      <div className={classes.display_inline}>
         <CardMedia component="img" image={props.cardObject.image} />
       </div>
     </div>
   )
 }
 
-export default function CardLayout(props) {
-
-  const clockIcon = <FontAwesomeIcon className={useStyles().subImage} icon={faClock} color='lightgrey' />
-  const viewsIcon = <FontAwesomeIcon className={useStyles().subImage} icon={faEye} color='lightgrey' />
-
+function CardView(props) {
+  const classes = useStyles();
+  const clockIcon = <FontAwesomeIcon className={classes.subImage} icon={faClock} color='lightgrey' />
+  const viewsIcon = <FontAwesomeIcon className={classes.subImage} icon={faEye} color='lightgrey' />
   return (
-    <Card className={useStyles().root}>
+    <div>
       {props.cardObject.isPlaylist ? <OverlayView cardObject={props.cardObject} /> : <MainView cardObject={props.cardObject} />}
       <Box display="flex" p={1} justifyContent="space-between" alignItems="center">
         <Box flexShrink={1}>
@@ -109,7 +114,7 @@ export default function CardLayout(props) {
         </Box>
         <Box width="25px" justify="flex-end">
           <CardMedia
-            className={useStyles().trainer_image}
+            className={classes.trainer_image}
             image={props.cardObject.trainer_image}
           />
         </Box>
@@ -139,6 +144,25 @@ export default function CardLayout(props) {
           </Box>
         </Box>
         : null}
+    </div>
+  )
+}
+
+export default function CardLayout(props) {
+
+  const classes = useStyles();
+  const [state, setState] = useState({
+    raised: false,
+    shadow: 1,
+  })
+
+  return (
+    <Card className={classes.root}
+      classes={{ root: state.raised ? classes.cardHovered : "" }}
+      onMouseOver={() => setState({ raised: true, shadow: 3 })}
+      onMouseOut={() => setState({ raised: false, shadow: 1 })}
+      raised={state.raised} zdepth={state.shadow}>
+      <CardView cardObject={props.cardObject}/>
     </Card>
   );
 }
