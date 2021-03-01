@@ -33,22 +33,18 @@ const useStyles = makeStyles((theme) => ({
   },
   display_inline: {
     display: 'inline-block'
-  },
-  subIcon: {
-
   }
 }));
 
 export default function CardLayout(props) {
 
-  const classes = useStyles();
-  const clockIcon = <FontAwesomeIcon className={classes.subImage} icon={faClock} color='lightgrey'/>
-  const viewsIcon = <FontAwesomeIcon className={classes.subImage} icon={faEye} color='lightgrey'/>
+  const clockIcon = <FontAwesomeIcon className={useStyles().subImage} icon={faClock} color='lightgrey'/>
+  const viewsIcon = <FontAwesomeIcon className={useStyles().subImage} icon={faEye} color='lightgrey'/>
 
   return (
-    <Card className={classes.root}>
+    <Card className={useStyles().root}>
       <CardMedia
-        className={classes.media}
+        className={useStyles().media}
         image={props.cardObject.image}
       />
       <Box display="flex" p={1} justifyContent="space-between" alignItems="center">
@@ -61,7 +57,7 @@ export default function CardLayout(props) {
         </Box>
         <Box width="25px" justify="flex-end">
           <CardMedia
-            className={classes.trainer_image}
+            className={useStyles().trainer_image}
             image={props.cardObject.trainer_image}
           />
         </Box>
