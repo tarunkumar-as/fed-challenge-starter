@@ -57,6 +57,9 @@ const useStyles = makeStyles(() => ({
     position: 'absolute',
     left: '25px',
     bottom: '10px',
+  },
+  mainText: {
+    textAlign: 'left'
   }
 }));
 
@@ -120,7 +123,7 @@ function CardView(props) {
       <Box display="flex" p={1} justifyContent="space-between" alignItems="center">
         <Box flexShrink={1}>
           <CardContent>
-            <Typography>
+            <Typography className={classes.mainText}>
               {props.cardObject.title}
             </Typography>
           </CardContent>

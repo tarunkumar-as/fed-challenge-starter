@@ -5,6 +5,15 @@ import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { CardDict } from './imagesDict';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'sans-serif',
+    ].join(','),
+  },});
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -25,6 +34,7 @@ export default function App() {
   })
 
   return (
+    <ThemeProvider theme={theme}>
     <Grid container spacing={4} className={classes.gridContainer}>
       <Grid item xs={12} sm={3}>
         <ButtonBase className={classes.button} onClick={() => { setState({ selectedButton: 1 }) }}>
@@ -67,5 +77,6 @@ export default function App() {
         </ButtonBase>
       </Grid>
     </Grid>
+    </ThemeProvider>
   );
 }
