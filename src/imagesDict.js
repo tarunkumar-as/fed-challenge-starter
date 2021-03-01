@@ -27,7 +27,7 @@ export const CardDict = {
     Card2: {
         image: Card6ImgThumb,
         trainer_image: Card6Img,
-        title: "Perfoemance Series",
+        title: "Performance Series",
         isPlaylist: true,
         videosCount: 9
     },

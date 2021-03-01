@@ -8,7 +8,8 @@ import { CardDict } from './imagesDict';
 const useStyles = makeStyles({
   gridContainer: {
     paddingLeft: '20px',
-    paddingRight: '20px'
+    paddingRight: '20px',
+    gridAutoRows: '1fr',
   }
 })
 
@@ -18,28 +19,28 @@ export default function App() {
   return (
     <Grid container spacing={4} className={classes.gridContainer}>
       <Grid item xs={12} sm={3}>
-        <Card header={CardDict.Card1.title} />
+        <Card cardObject={CardDict.Card1}/>
       </Grid>
       <Grid item xs={12} sm={3}>
-        <Card header={CardDict.Card2.title} />
+        <Card cardObject={CardDict.Card2}/>
       </Grid>
       <Grid item xs={12} sm={3}>
-        <Card header={CardDict.Card3.title} />
+        <Card cardObject={CardDict.Card3}/>
       </Grid>
       <Grid item xs={12} sm={3}>
-        <Card header={CardDict.Card4.title} />
+        <Card cardObject={CardDict.Card4}/>
       </Grid>
       <Grid item xs={12} sm={3}>
-        <Card header={CardDict.Card5.title} />
+        <Card cardObject={CardDict.Card5}/>
       </Grid>
       <Grid item xs={12} sm={3}>
-        <Card header={CardDict.Card6.title} />
+        <Card cardObject={CardDict.Card6}/>
       </Grid>
       <Grid item xs={12} sm={3}>
-        <Card header={CardDict.Card7.title} />
+        <Card cardObject={CardDict.Card7}/>
       </Grid>
       <Grid item xs={12} sm={3}>
-        <Card header={CardDict.Card8.title} />
+        <Card cardObject={CardDict.Card8}/>
       </Grid>
     </Grid>
   );

@@ -4,9 +4,9 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { CardDict } from './imagesDict';
+import Box from '@material-ui/core/Box';
 
-const styles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
   },
@@ -22,37 +22,38 @@ const styles = makeStyles(() => ({
   trainer_image: {
     width: 25,
     height: 25,
-    marginRight: 25
   },
+  display_inline: {
+    display: 'inline-block'
+  }
 }));
 
-class CardLayout extends React.Component {
+export default function CardLayout(props) {
+  const classes = useStyles();
 
-  render() {
-    return (
-      <Card className={styles().root}>
-        <CardMedia
-          className={styles().media}
-          image={CardDict.Card1.image}
-          title="Paella dish"
-        />
-        <div className={styles().header}>
-          <div>
-            <CardContent>
-              <Typography>
-                {this.props.header}
-              </Typography>
-            </CardContent>
-          </div>
+  return (
+    <Card className={classes.root}>
+      <CardMedia
+        className={classes.media}
+        image={props.cardObject.image}
+        title="Paella dish"
+      />
+      <Box display="flex" p={1} justifyContent="space-between" alignItems="center">
+        <Box flexShrink={1}>
+          <CardContent>
+            <Typography>
+              {props.cardObject.title}
+            </Typography>
+          </CardContent>
+        </Box>
+        <Box width="25px" justify="flex-end">
           <CardMedia
-            className={styles().trainer_image}
-            image={CardDict.Card1.trainer_image}
+            className={classes.trainer_image}
+            image={props.cardObject.trainer_image}
             title="Live from space album cover"
           />
-        </div>
-      </Card>
-    );
-  }
+        </Box>
+      </Box>
+    </Card>
+  );
 }
-
-export default CardLayout;
