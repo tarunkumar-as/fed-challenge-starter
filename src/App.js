@@ -1,26 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Card from './Card'
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { CardDict } from './imagesDict';
 
-function App() {
+const useStyles = makeStyles({
+  gridContainer: {
+    paddingLeft: '20px',
+    paddingRight: '20px'
+  }
+})
+
+export default function App() {
+
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid container spacing={4} className={classes.gridContainer}>
+      <Grid item xs={12} sm={3}>
+        <Card header={CardDict.Card1.title} />
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card header={CardDict.Card2.title} />
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card header={CardDict.Card3.title} />
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card header={CardDict.Card4.title} />
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card header={CardDict.Card5.title} />
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card header={CardDict.Card6.title} />
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card header={CardDict.Card7.title} />
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Card header={CardDict.Card8.title} />
+      </Grid>
+    </Grid>
   );
 }
-
-export default App;
